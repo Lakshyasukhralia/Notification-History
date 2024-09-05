@@ -1,21 +1,21 @@
-# Fitmunk - Workout & Exercise
-Fitmunk, the revolutionary fitness app that transforms your workout experience. With a focus on personalization, expert guidance, and convenience, Fitmunk is here to elevate your fitness journey to new heights.
+# Recovery Wiz - Undelete Messages
+Save and recover deleted messages from any app via phone’s notification history.
 
-![App Screenshot](https://github.com/Lakshyasukhralia/Workout-App/blob/master/Screenshot_20240220_010648.png)
+![App Screenshot](https://github.com/Lakshyasukhralia/Notification-History/blob/master/Apple%20iPhone%2011%20Pro%20Max%20Presentation%20(2).png)
 
 ## Features
-#### Tailored Workouts:
-Fitmunk takes your fitness journey personally. Crafted specifically for your fitness level, goals, and preferences, our workouts are designed to be purposeful and effective. Whether you're aiming for weight loss, muscle gain, or overall wellness, Fitmunk adapts to your unique needs.
+#### Recover Deleted Messages:
+The Recovery Wiz app captures and stores messages as soon as they arrive in your notification bar. Even if the sender deletes the message before you read it, our app will have stored the notification, allowing you to view the original content. This is perfect for apps like WhatsApp, where messages can be deleted by the sender.
 
-#### Expert Exercises:
-Explore a vast library of expert-curated exercises, each meticulously designed to maximize results while maintaining proper form. Detailed instructions accompany each exercise, offering valuable insights into technique and execution to enhance your workout experience and ensure safety.
+#### Track Notifications from Any App: 
+Our app works seamlessly with all the messaging apps you use on your phone, including WhatsApp, Instagram, Telegram, Facebook Messenger, and more. As long as the app sends notifications, Recovery Wiz will capture and store them.
 
-#### Immersive Videos:
-Immerse yourself in high-quality video sessions led by experienced instructors. Whether it's strength training, yoga, or other fitness disciplines, follow along with step-by-step guidance to master each movement and stay motivated throughout your entire workout.
+#### Privacy and Security: 
+Your privacy is our top priority. Recovery Wiz does not collect any personal data, and all notifications are stored securely on your device. The app does not require internet access, ensuring that your stored messages and notifications remain private and are not shared with third parties. You can also set a passcode or use biometric security to protect access to your stored notifications.
 
-#### Workout Variety:
-Break free from monotony with Fitmunk's diverse range of workouts catering to different fitness levels and interests. From intense HIIT sessions to calming yoga flows, our app offers a variety of options to keep your fitness routine dynamic and engaging.
+#### View Missed Notifications: 
+Sometimes notifications are dismissed accidentally, or they may disappear after being swiped away. With Recovery Wiz, you can recover and view all missed notifications in a single, organized list. Whether it's an important work message or a missed social media update, you can recover and read it at any time.
 
-#### Track Your Progress:
-Keep tabs on your fitness journey with Fitmunk's built-in workout history tracker. Monitor your progress, set new goals, and celebrate your achievements as you work towards a healthier and fitter you. Fitmunk makes it easy to stay motivated and stay on track.
+#### Filter by Time and App: 
+Easily filter your stored notifications based on the time they were received or the app they originated from. This makes finding specific messages quick and effortless. Whether you’re looking for a specific WhatsApp conversation or a message from Instagram, our advanced filtering system has you covered.
 
