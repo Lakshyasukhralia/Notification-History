@@ -1,7 +1,7 @@
 # Recovery Wiz - Undelete Messages
 Save and recover deleted messages from any app via phone’s notification history.
 
-![App Screenshot]([https://github.com/your-username/your-repo-name/blob/main/images/screenshot.png](https://github.com/Lakshyasukhralia/Notification-History/blob/master/Apple%20iPhone%2011%20Pro%20Max%20Presentation%20(2).png))
+![App Screenshot](https://github.com/Lakshyasukhralia/Notification-History/blob/master/Apple%20iPhone%2011%20Pro%20Max%20Presentation%20(2).png)
 
 ## Features
 -Recover Deleted Messages: The Recovery Wiz app captures and stores messages as soon as they arrive in your notification bar. Even if the sender deletes the message before you read it, our app will have stored the notification, allowing you to view the original content. This is perfect for apps like WhatsApp, where messages can be deleted by the sender.
