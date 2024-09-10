@@ -31,8 +31,8 @@ class MainActivity : ComponentActivity() {
                         popEnterTransition = ::slideInToRight,
                         popExitTransition = ::slideOutToRight
                     ) {
-                        MenuScreen {
-                            navController.navigate(Home(it))
+                        MenuScreen { pkg, app ->
+                            navController.navigate(Home(pkg, app))
                         }
                     }
                     composable<Home>(
@@ -42,7 +42,7 @@ class MainActivity : ComponentActivity() {
                         popExitTransition = ::slideOutToRight
                     ) {
                         val args = it.toRoute<Home>()
-                        HomeScreen(args.packageName) { title, pkg ->
+                        HomeScreen(args.packageName, args.appName) { title, pkg ->
                             navController.navigate(History(title, pkg))
                         }
                     }
@@ -90,7 +90,7 @@ fun slideOutToRight(scope: AnimatedContentTransitionScope<NavBackStackEntry>): E
 }
 
 @Serializable
-data class Home(val packageName: String)
+data class Home(val packageName: String, val appName: String)
 
 @Serializable
 data class History(val title: String, val packageName: String)

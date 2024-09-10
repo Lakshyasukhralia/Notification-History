@@ -35,7 +35,11 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
-fun HomeScreen(packageName: String, onHistoryClick: (title: String, packageName: String) -> Unit) {
+fun HomeScreen(
+    packageName: String,
+    appName: String,
+    onHistoryClick: (title: String, packageName: String) -> Unit
+) {
 
     val homeViewModel: HomeViewModel = viewModel()
     val uiState by homeViewModel.uiState.collectAsState()
@@ -65,7 +69,7 @@ fun HomeScreen(packageName: String, onHistoryClick: (title: String, packageName:
                     item {
                         Text(
                             modifier = Modifier,
-                            text = "${packageName}/subjects",
+                            text = appName,
                             minLines = 1,
                             color = Color.Black,
                             style = MaterialTheme.typography.titleMedium.copy(

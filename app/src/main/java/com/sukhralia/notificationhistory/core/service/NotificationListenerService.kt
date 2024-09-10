@@ -16,6 +16,8 @@ class NotificationListenerService : NotificationListenerService(), KoinComponent
     private val notificationRepository by inject<NotificationRepository>()
     private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
+    private var lastStoredNotification: Notification? = null
+
     override fun onNotificationPosted(sbn: StatusBarNotification) {
         val packageName = sbn.packageName
         val extras = sbn.notification.extras
@@ -24,21 +26,17 @@ class NotificationListenerService : NotificationListenerService(), KoinComponent
 
         if (text.isNullOrEmpty() || title.isNullOrEmpty()) return
 
-//                || title.contains("Whatsapp") || title.contains("WhatsApp") || text.contains(
-//            "new messages"
-//        )
-
-//        if (!checkAllowedPackageName(packageName)
-//        ) return
-
         val modifiedTitle = title.split(":").getOrNull(0)?.split("(")?.getOrNull(0)?.trim()
 
         val notification =
             Notification(app = packageName, title = modifiedTitle, message = text.toString())
 
+        if (lastStoredNotification == notification) return
+
         coroutineScope.launch {
             notificationRepository.saveNotifications(listOf(notification))
         }
+        lastStoredNotification = notification
         Log.d("NotificationListener", "Package: $packageName, Title: $title, Text: $text")
     }
 
