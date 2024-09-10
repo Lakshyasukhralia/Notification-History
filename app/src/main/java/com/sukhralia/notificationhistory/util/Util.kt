@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import android.provider.Settings
 import android.text.TextUtils
+import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import com.sukhralia.notificationhistory.feature.tracker.domain.model.AppInfo
 import java.text.SimpleDateFormat
@@ -48,4 +49,8 @@ fun getInstalledApps(context: Context): List<AppInfo> {
     }
 
     return apps
+}
+
+fun getAppIcon(context: Context, icon: Int): Drawable? {
+    return ContextCompat.getDrawable(context, icon)
 }

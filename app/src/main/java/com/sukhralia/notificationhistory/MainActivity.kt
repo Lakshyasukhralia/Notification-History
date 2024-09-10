@@ -16,11 +16,16 @@ import com.sukhralia.notificationhistory.feature.tracker.presentation.history.Hi
 import com.sukhralia.notificationhistory.feature.tracker.presentation.home.HomeScreen
 import com.sukhralia.notificationhistory.feature.tracker.presentation.menu.MenuScreen
 import com.sukhralia.notificationhistory.ui.theme.NotificationHistoryTheme
+import com.sukhralia.notificationhistory.util.ViewHelper
+import com.sukhralia.notificationhistory.util.getInstalledApps
 import kotlinx.serialization.Serializable
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        ViewHelper.appList = getInstalledApps(this)
+
         setContent {
             val navController = rememberNavController()
             NotificationHistoryTheme {

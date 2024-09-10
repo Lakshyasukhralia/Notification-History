@@ -31,7 +31,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -49,7 +48,7 @@ import androidx.core.graphics.drawable.toBitmap
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sukhralia.notificationhistory.R
-import com.sukhralia.notificationhistory.util.getInstalledApps
+import com.sukhralia.notificationhistory.util.ViewHelper
 import com.sukhralia.notificationhistory.util.isNotificationServiceEnabled
 import com.sukhralia.notificationhistory.util.openNotificationSettings
 
@@ -64,8 +63,8 @@ fun MenuScreen(onHomeClicked: (packageName: String, appName: String) -> Unit = {
     var isPermissionClicked by remember { mutableStateOf(false) }
     var isPermissionGranted by remember { mutableStateOf(isNotificationServiceEnabled(context)) }
 
-    val installedApps by rememberSaveable {
-        mutableStateOf(getInstalledApps(context))
+    val installedApps by remember {
+        mutableStateOf(ViewHelper.appList)
     }
 
     LifecycleResumeEffect(key1 = Unit) {
