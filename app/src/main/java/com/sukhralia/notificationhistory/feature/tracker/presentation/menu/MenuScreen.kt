@@ -31,6 +31,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -63,7 +64,7 @@ fun MenuScreen(onHomeClicked: (packageName: String, appName: String) -> Unit = {
     var isPermissionClicked by remember { mutableStateOf(false) }
     var isPermissionGranted by remember { mutableStateOf(isNotificationServiceEnabled(context)) }
 
-    val installedApps by remember {
+    val installedApps by rememberSaveable {
         mutableStateOf(getInstalledApps(context))
     }
 
