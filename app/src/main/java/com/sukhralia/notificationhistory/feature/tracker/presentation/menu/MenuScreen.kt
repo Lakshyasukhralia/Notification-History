@@ -1,8 +1,5 @@
 package com.sukhralia.notificationhistory.feature.tracker.presentation.menu
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,12 +12,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -34,20 +28,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.graphics.drawable.toBitmap
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sukhralia.notificationhistory.R
+import com.sukhralia.notificationhistory.feature.tracker.presentation.component.AppCard
 import com.sukhralia.notificationhistory.util.ViewHelper
 import com.sukhralia.notificationhistory.util.isNotificationServiceEnabled
 import com.sukhralia.notificationhistory.util.openNotificationSettings
@@ -115,7 +106,6 @@ fun MenuScreen(onHomeClicked: (packageName: String, appName: String) -> Unit = {
 
             uiState.packages.isNotEmpty() -> {
                 Column {
-
                     Text(
                         modifier = Modifier.padding(horizontal = 8.dp),
                         text = "Apps",
@@ -130,48 +120,8 @@ fun MenuScreen(onHomeClicked: (packageName: String, appName: String) -> Unit = {
                     LazyVerticalGrid(columns = GridCells.Fixed(2)) {
 
                         items(uiState.packages) { item ->
-
                             val appInfo = installedApps.firstOrNull { it.packageName == item }
-
-                            Card(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .background(Color.White)
-                                    .clip(RoundedCornerShape(8.dp))
-                                    .padding(horizontal = 8.dp, vertical = 8.dp)
-                                    .clickable { onHomeClicked(item, appInfo?.appName ?: item) },
-                                colors = CardDefaults.elevatedCardColors(containerColor = Color.White),
-                                elevation = CardDefaults.cardElevation(4.dp),
-                            ) {
-                                Column(
-                                    Modifier
-                                        .fillMaxSize()
-                                        .padding(16.dp),
-                                    horizontalAlignment = Alignment.CenterHorizontally,
-                                    verticalArrangement = Arrangement.Center
-                                ) {
-                                    appInfo?.let {
-                                        Image(
-                                            bitmap = appInfo.icon.toBitmap().asImageBitmap(),
-                                            contentDescription = null,
-                                            modifier = Modifier
-                                                .size(36.dp)
-                                        )
-                                        Spacer(modifier = Modifier.height(8.dp))
-                                        Text(
-                                            textAlign = TextAlign.Center,
-                                            text = appInfo.appName,
-                                            minLines = 1,
-                                            maxLines = 1,
-                                            overflow = TextOverflow.Ellipsis,
-                                            color = Color.Black,
-                                            style = MaterialTheme.typography.titleMedium.copy(
-                                                fontSize = 20.sp
-                                            ),
-                                        )
-                                    }
-                                }
-                            }
+                            AppCard(onHomeClicked, item, appInfo)
                         }
                     }
                 }
@@ -237,3 +187,4 @@ fun MenuScreen(onHomeClicked: (packageName: String, appName: String) -> Unit = {
         }
     }
 }
+

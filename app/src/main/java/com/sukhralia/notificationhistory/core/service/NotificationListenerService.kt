@@ -5,6 +5,7 @@ import android.service.notification.StatusBarNotification
 import android.util.Log
 import com.sukhralia.notificationhistory.feature.tracker.domain.model.Notification
 import com.sukhralia.notificationhistory.feature.tracker.domain.repository.NotificationRepository
+import com.sukhralia.notificationhistory.util.ViewHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -23,6 +24,10 @@ class NotificationListenerService : NotificationListenerService(), KoinComponent
         val extras = sbn.notification.extras
         val title = extras.getString("android.title")
         val text = extras.getCharSequence("android.text")
+
+        if (ViewHelper.whiteListedApps?.isNotEmpty() == true) {
+            if (!ViewHelper.whiteListedApps!!.contains(packageName)) return
+        }
 
         if (text.isNullOrEmpty() || title.isNullOrEmpty()) return
 
