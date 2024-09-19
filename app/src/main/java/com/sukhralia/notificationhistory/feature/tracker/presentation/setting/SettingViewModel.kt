@@ -3,7 +3,6 @@ package com.sukhralia.notificationhistory.feature.tracker.presentation.setting
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sukhralia.notificationhistory.core.persistence.preference.PreferenceRepository
-import com.sukhralia.notificationhistory.util.ViewHelper
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -25,7 +24,6 @@ class SettingViewModel : ViewModel(), KoinComponent {
     fun removeAll() {
         viewModelScope.launch {
             preferenceRepository.putString("white_listed_apps", "")
-            ViewHelper.whiteListedApps = emptyList()
             _uiState.update { state ->
                 state.copy(
                     whiteListedApps = emptyList()
@@ -38,7 +36,6 @@ class SettingViewModel : ViewModel(), KoinComponent {
         viewModelScope.launch {
             val appList = _uiState.value.installedApps.map { it.packageName }
             preferenceRepository.putString("white_listed_apps", appList.joinToString(","))
-            ViewHelper.whiteListedApps = appList
 
             _uiState.update { state ->
                 state.copy(
@@ -50,14 +47,17 @@ class SettingViewModel : ViewModel(), KoinComponent {
 
     fun updateWhiteListedApps(pkg: String) {
         viewModelScope.launch {
-            val wApps = _uiState.value.whiteListedApps.toMutableList()
-            if (wApps.isEmpty().not() && wApps.contains(pkg)) {
-                wApps.remove(pkg)
+            var wApps = _uiState.value.whiteListedApps?.toMutableList()
+            if (_uiState.value.whiteListedApps == null) {
+                wApps = mutableListOf(pkg)
             } else {
-                wApps.add(pkg)
+                if (wApps!!.isEmpty().not() && wApps.contains(pkg)) {
+                    wApps.remove(pkg)
+                } else {
+                    wApps.add(pkg)
+                }
             }
             preferenceRepository.putString("white_listed_apps", wApps.joinToString(","))
-            ViewHelper.whiteListedApps = wApps
             _uiState.update { state ->
                 state.copy(
                     whiteListedApps = wApps
@@ -80,7 +80,6 @@ class SettingViewModel : ViewModel(), KoinComponent {
                         whiteListedApps = appList
                     )
                 }
-                ViewHelper.whiteListedApps = appList
             } else {
                 val wAppsList = wApps.split(",").toMutableList()
                 _uiState.update { state ->
@@ -88,7 +87,6 @@ class SettingViewModel : ViewModel(), KoinComponent {
                         whiteListedApps = wAppsList
                     )
                 }
-                ViewHelper.whiteListedApps = wAppsList
             }
         }
     }

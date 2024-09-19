@@ -51,8 +51,11 @@ fun SettingScreen() {
     var isPermissionClicked by remember { mutableStateOf(false) }
     var isPermissionGranted by remember { mutableStateOf(isNotificationServiceEnabled(context)) }
 
-    var checked by remember { mutableStateOf(true) }
-
+    var checked = if (uiState.whiteListedApps == null) {
+        true
+    } else {
+        uiState.installedApps.map { it.packageName }.toSet() == uiState.whiteListedApps!!.toSet()
+    }
     LifecycleResumeEffect(key1 = Unit) {
         isPermissionGranted = isNotificationServiceEnabled(context)
         onPauseOrDispose { }
@@ -76,12 +79,10 @@ fun SettingScreen() {
                         ),
                     )
                     Switch(
-                        checked = checked,
-                        onCheckedChange = {
+                        checked = checked, onCheckedChange = {
                             checked = it
                             if (!checked) viewModel.removeAll() else viewModel.addAll()
-                        },
-                        modifier = Modifier.align(Alignment.End)
+                        }, modifier = Modifier.align(Alignment.End)
                     )
                     Spacer(modifier = Modifier.height(12.dp))
                     LazyVerticalGrid(columns = GridCells.Fixed(2)) {
@@ -91,7 +92,7 @@ fun SettingScreen() {
                                 { pkg, _ -> viewModel.updateWhiteListedApps(pkg) },
                                 item.packageName,
                                 item,
-                                uiState.whiteListedApps.contains(item.packageName)
+                                uiState.whiteListedApps?.contains(item.packageName) ?: true
                             )
                         }
                     }
@@ -120,32 +121,26 @@ fun SettingScreen() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
-        contentAlignment = Alignment.BottomEnd
+            .padding(16.dp), contentAlignment = Alignment.BottomEnd
     ) {
         FloatingActionButton(
             onClick = {
                 isPermissionClicked = true
                 openNotificationSettings(context)
-            },
-            modifier = Modifier
-                .padding(bottom = 16.dp),
-            containerColor = Color.White
+            }, modifier = Modifier.padding(bottom = 16.dp), containerColor = Color.White
         ) {
-            if (isPermissionGranted)
-                Icon(
-                    Icons.Default.Close,
-                    modifier = Modifier.size(32.dp),
-                    tint = Color.Black,
-                    contentDescription = "Play"
-                )
-            else
-                Icon(
-                    Icons.Default.PlayArrow,
-                    modifier = Modifier.size(32.dp),
-                    tint = Color.Black,
-                    contentDescription = "Stop"
-                )
+            if (isPermissionGranted) Icon(
+                Icons.Default.Close,
+                modifier = Modifier.size(32.dp),
+                tint = Color.Black,
+                contentDescription = "Play"
+            )
+            else Icon(
+                Icons.Default.PlayArrow,
+                modifier = Modifier.size(32.dp),
+                tint = Color.Black,
+                contentDescription = "Stop"
+            )
         }
     }
 }
